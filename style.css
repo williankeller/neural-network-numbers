@@ -46,13 +46,6 @@ header {
     gap: 15px;
 }
 
-.logo-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
-}
-
 h1 {
     font-size: 1.4rem;
     font-weight: 700;

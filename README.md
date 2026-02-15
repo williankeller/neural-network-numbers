@@ -6,8 +6,8 @@ This project was created as a study exercise to understand how neural networks w
 
 Built entirely with vanilla JavaScript, HTML, and CSS. No frameworks, no build tools, no server required. Just open `index.html` and start drawing.
 
-![Architecture: 784 → 64 → 10](https://img.shields.io/badge/architecture-784→64→10-00f5ff?style=flat-square)
-![Accuracy: ~97%](https://img.shields.io/badge/accuracy-~97%25-00ff88?style=flat-square)
+![Architecture: 784 → 64 → 10](https://img.shields.io/badge/architecture-784→64→10-4a6cf7?style=flat-square)
+![Accuracy: ~97%](https://img.shields.io/badge/accuracy-~97%25-2ea44f?style=flat-square)
 ![No Dependencies](https://img.shields.io/badge/dependencies-none-ff00aa?style=flat-square)
 
 ## What This Is
