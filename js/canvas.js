@@ -106,6 +106,35 @@ class DrawingCanvas {
     }
 
     getPixels() {
+        // Center the drawing based on center of mass, matching MNIST preprocessing
+        const centered = new Float32Array(784);
+        let totalMass = 0, comX = 0, comY = 0;
+
+        for (let y = 0; y < 28; y++) {
+            for (let x = 0; x < 28; x++) {
+                const v = this.pixels[y * 28 + x];
+                totalMass += v;
+                comX += x * v;
+                comY += y * v;
+            }
+        }
+
+        if (totalMass > 0) {
+            // Shift so center of mass lands at grid center (13.5, 13.5)
+            const shiftX = Math.round(13.5 - comX / totalMass);
+            const shiftY = Math.round(13.5 - comY / totalMass);
+
+            for (let y = 0; y < 28; y++) {
+                for (let x = 0; x < 28; x++) {
+                    const srcX = x - shiftX;
+                    const srcY = y - shiftY;
+                    if (srcX >= 0 && srcX < 28 && srcY >= 0 && srcY < 28) {
+                        centered[y * 28 + x] = this.pixels[srcY * 28 + srcX];
+                    }
+                }
+            }
+        }
+
         // Apply light Gaussian blur to match MNIST style
         const blurred = new Float32Array(784);
         const kernel = [
@@ -122,7 +151,7 @@ class DrawingCanvas {
                     for (let kx = -1; kx <= 1; kx++) {
                         const py = Math.min(27, Math.max(0, y + ky));
                         const px = Math.min(27, Math.max(0, x + kx));
-                        sum += this.pixels[py * 28 + px] * kernel[ky + 1][kx + 1];
+                        sum += centered[py * 28 + px] * kernel[ky + 1][kx + 1];
                     }
                 }
                 blurred[y * 28 + x] = sum / kSum;
